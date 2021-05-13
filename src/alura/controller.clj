@@ -55,3 +55,8 @@
                                        (= (:amount %) amount)))]
     {:payments payments
      :amount (logic/sum-all-payments payments)}))
+
+(defn get-grouped-payments
+  [customer]
+  (let [payments (db/get-payments #(= (:customer-id %) (:id customer)))]
+    (logic/group-payments-by-category payments)))

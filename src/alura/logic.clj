@@ -51,3 +51,16 @@
 (defn sum-all-payments
   [payments]
   (reduce + (map #(:amount %) payments)))
+
+(defn sum-payments-by-category
+  [[category payments]]
+
+  {:category category
+   :quantity (count payments)
+   :amount (reduce + 0 (map #(:amount %) payments))})
+
+(defn group-payments-by-category
+  [payments]
+  (->> payments
+       (group-by :category)
+       (map sum-payments-by-category)))

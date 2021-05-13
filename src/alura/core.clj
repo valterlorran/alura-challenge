@@ -50,3 +50,7 @@
 (println ">>> search by amount")
 (pprint (controller/search-by-amount customer 1000))
 
+; Show all payments grouped by category
+(println ">>> Payments grouped by category")
+(pprint (controller/get-grouped-payments customer))
+
