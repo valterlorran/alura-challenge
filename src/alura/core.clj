@@ -44,7 +44,7 @@
 
 ; Get the total spent this month
 (println ">>> monthly invoice")
-(pprint (controller/get-month-bill customer))
+(pprint (controller/get-month-invoice customer))
 
 ; Search by amount
 (println ">>> search by amount")

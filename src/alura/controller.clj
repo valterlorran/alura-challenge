@@ -42,7 +42,7 @@
   (let [payments (db/get-payments #(= (:customer-id %) (:id customer)))]
     payments))
 
-(defn get-month-bill
+(defn get-month-invoice
   [customer]
   (let [payments (db/get-payments #(= (:customer-id %) (:id customer)))
         amount (logic/sum-all-payments payments)]
