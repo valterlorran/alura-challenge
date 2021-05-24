@@ -4,6 +4,10 @@
             [alura.db :as db])
   (:use clojure.pprint))
 
+;(db/clear-db)
+
+;(controller/populate-categories)
+
 ; Creates a new customer
 (def customer
   (controller/create-customer
@@ -11,46 +15,47 @@
      :cpf "12898747699"
      :email "usersomething@nubank.com.br"}))
 
+(def customer2
+  (controller/create-customer
+    {:name "João Something"
+     :cpf "29832103823"
+     :email "joao.something@nubank.com.br"}))
+
+(def customer3
+  (controller/create-customer
+    {:name "Tereza Justina"
+     :cpf "82382398998"
+     :email "tereza.justina@nubank.com.br"}))
+
 ; Add a card to the customer
 (def card
   (controller/add-credit-card customer))
+
+(pprint (db/find-customer-by-id controller/conn (:customer/id customer)))
+(pprint card)
 
 ; Simulates some payments
 (controller/add-payment customer
                         card
                         {:merchant "Supermarket"
-                         :amount   2000
-                         :category "supermarket"})
+                         :amount   2000N
+                         :category "Supermarket"})
 
 (controller/add-payment customer
                         card
                         {:merchant "Supermarket 2"
-                         :amount   1000
-                         :category "supermarket"})
+                         :amount   1000N
+                         :category "Supermarket"})
 
 (controller/add-payment customer
                         card
                         {:merchant "Apple"
-                         :amount   1500
-                         :category "technology"})
+                         :amount   1500N
+                         :category "Software"})
 
-; Gets the amount spent by category
-(println ">>> get-amount-spent-by-category")
-(pprint (controller/get-amount-spent-by-category customer "supermarket"))
-
-; Show all the payments for a give customer
+; Show all the payments for a given customer
 (println ">>> payments")
-(pprint (controller/list-payments customer))
-
-; Get the total spent this month
-(println ">>> monthly invoice")
-(pprint (controller/get-month-invoice customer))
-
-; Search by amount
-(println ">>> search by amount")
-(pprint (controller/search-by-amount customer 1000))
-
-; Show all payments grouped by category
-(println ">>> Payments grouped by category")
-(pprint (controller/get-grouped-payments customer))
+;(pprint (controller/list-payments customer))
+(println ">>> find without purchase")
+(pprint (db/find-clients-without-purchase controller/conn))
 
