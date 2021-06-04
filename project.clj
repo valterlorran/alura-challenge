@@ -6,5 +6,7 @@
   :repositories {"my.datomic.com" {:url "https://my.datomic.com/repo"
                                    :creds :gpg}}
   :dependencies [[org.clojure/clojure "1.10.1"]
-                 [com.datomic/datomic-pro "1.0.6269"]]
+                 [com.datomic/datomic-pro "1.0.6269"]
+                 [org.clojure/test.check "0.10.0"]
+                 [prismatic/schema "1.1.12"]]
   :repl-options {:init-ns alura.core})
